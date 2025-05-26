@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>청설모 커뮤니티</title>
+  <style>
+    body { font-family: 'Apple SD Gothic Neo', sans-serif; margin: 0; background: #f5f9ff; }
+    header {
+      background: #d4e4fa;
+      border-bottom: 1px solid #c0d3ee;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+    }
+    .logo-nav-box {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      background: white;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+    }
+    .logo { font-size: 24px; font-weight: bold; color: #007aff; }
+    .main-nav a {
+      margin: 0 8px;
+      color: #333;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .top-actions {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+    }
+    .write-button {
+      padding: 6px 12px;
+      background-color: #007aff;
+      color: white;
+      border-radius: 4px;
+      font-weight: bold;
+    }
+    .sub-nav {
+      display: flex;
+      gap: 16px;
+      background: #f0f4fb;
+      padding: 0.75rem 2rem;
+      border-bottom: 1px solid #d4e4fa;
+    }
+    .sub-nav a {
+      text-decoration: none;
+      color: #333;
+      font-size: 15px;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+      display: flex;
+      gap: 2rem;
+    }
+    .main-content {
+      flex: 3;
+    }
+    .sidebar {
+      flex: 1;
+    }
+    .description {
+      background: white;
+      border-radius: 8px;
+      padding: 1rem;
+      font-size: 15px;
+      color: #444;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .search-bar input {
+      width: 100%;
+      padding: 12px;
+      font-size: 14px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      margin-bottom: 2rem;
+    }
+    .highlight-bar {
+      display: flex;
+      gap: 1rem;
+      overflow-x: auto;
+      margin-bottom: 1rem;
+    }
+    .highlight-card {
+      min-width: 220px;
+      background: white;
+      border-radius: 12px;
+      padding: 1rem;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+      flex-shrink: 0;
+    }
+    .post-card {
+      background: white;
+      padding: 1rem;
+      border-radius: 8px;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+      margin-bottom: 1rem;
+    }
+    .post-card h4 {
+      margin: 0 0 6px;
+      font-size: 17px;
+    }
+    .popular-searches, .policy-image {
+      background: white;
+      padding: 1rem;
+      border-radius: 8px;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+      margin-bottom: 1.5rem;
+    }
+    .popular-searches ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .popular-searches li {
+      margin: 4px 0;
+      color: #007aff;
+    }
+    .policy-image {
+      height: 200px;
+      background: #eef2f9;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #aaa;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo-nav-box">
+      <div class="logo">청설모</div>
+      <nav class="main-nav">
+        <a href="#">커뮤니티</a>
+        <a href="#">멘토멘티</a>
+        <a href="#">마이페이지</a>
+        <a href="#">청년정책</a>
+      </nav>
+    </div>
+    <div class="top-actions">
+      <a href="#">로그인</a>
+      <a href="#">회원가입</a>
+      <a href="#">문의</a>
+      <a href="#" class="write-button">글쓰기</a>
+    </div>
+  </header>
+
+  <div class="sub-nav">
+    <a href="#">홈</a>
+    <a href="#">후기</a>
+    <a href="#">궁금해</a>
+    <a href="#">자료공유</a>
+    <a href="#">잡담</a>
+  </div>
+
+  <div class="container">
+    <div class="main-content">
+      <div class="description">
+        청년들을 위한 커뮤니티 플랫폼, 청설모는 삶의 이야기부터 정책 정보까지 모두 함께 나누는 공간입니다.
+      </div>
+
+      <div class="search-bar">
+        <input type="text" placeholder="궁금한 내용을 검색해보세요..." />
+      </div>
+
+      <div class="highlight-bar">
+        <div class="highlight-card">
+          <strong>배관 미치겠어요 제발...후하</strong>
+        </div>
+        <div class="highlight-card">
+          <strong>화이트 키친크로스로 완성하는 프렌치 주방 💡</strong>
+        </div>
+        <div class="highlight-card">
+          <strong>아랫집 담배 냄새 때문에 죽겠어요.</strong>
+        </div>
+        <div class="highlight-card">
+          <strong>사이드테이블 핫템 모음 🔍</strong>
+        </div>
+      </div>
+
+      <div class="post-card">
+        <h4>혼자 사는 방 꾸미기 팁 공유합니다!</h4>
+        <p>자취하면서 알아낸 꿀팁 정리해봤어요. 커튼은 무조건 어두운 색!</p>
+      </div>
+      <div class="post-card">
+        <h4>면접에서 이런 질문 받았는데요...</h4>
+        <p>청년 면접에서 자주 묻는 질문, 다 같이 공유해봐요!</p>
+      </div>
+      <div class="post-card">
+        <h4>노트북 추천해주세요</h4>
+        <p>취준 중인데 영상 편집도 가볍게 될만한 노트북 없을까요?</p>
+      </div>
+    </div>
+
+    <div class="sidebar">
+      <div class="popular-searches">
+        <h4>인기 검색어</h4>
+        <ul>
+          <li>#청년지원금</li>
+          <li>#자취노하우</li>
+          <li>#공모전정보</li>
+          <li>#멘토찾기</li>
+          <li>#면접준비</li>
+        </ul>
+      </div>
+
+      <div class="policy-image">
+        <p>정책 관련 이미지 영역 (예: 포스터)</p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
