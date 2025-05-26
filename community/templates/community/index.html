@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -5,14 +6,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>청설모 커뮤니티</title>
   <style>
-    body { font-family: 'Apple SD Gothic Neo', sans-serif; margin: 0; background: #f5f9ff; }
+    body 
+    { font-family: 'Apple SD Gothic Neo', sans-serif; margin: 0; background:url('{% static "images/배타는이미지.png" %}') no-repeat center center fixed;
+  background-size: cover; }
     header {
       background: #d4e4fa;
       border-bottom: 1px solid #c0d3ee;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 1rem 2rem;
+      padding: 2rem 2rem;
     }
     .logo-nav-box {
       display: flex;
@@ -22,7 +25,19 @@
       padding: 0.5rem 1rem;
       border-radius: 8px;
     }
-    .logo { font-size: 24px; font-weight: bold; color: #007aff; }
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+      color: #007aff;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .logo img {
+      height: 32px;
+      width: auto;
+      object-fit: contain;
+    }
     .main-nav a {
       margin: 0 8px;
       color: #333;
@@ -137,7 +152,10 @@
 <body>
   <header>
     <div class="logo-nav-box">
-      <div class="logo">청설모</div>
+      <div class="logo">
+        <img src="{% static 'images/청설모.jpg' %}" alt="청설모 로고">
+        청설모
+      </div>
       <nav class="main-nav">
         <a href="#">커뮤니티</a>
         <a href="#">멘토멘티</a>
@@ -164,7 +182,8 @@
   <div class="container">
     <div class="main-content">
       <div class="description">
-        청년들을 위한 커뮤니티 플랫폼, 청설모는 삶의 이야기부터 정책 정보까지 모두 함께 나누는 공간입니다.
+        청년들의 인생설계 모임 플랫폼, 청설모입니다.
+        세상 살아가는 방법을 공유해보세요!
       </div>
 
       <div class="search-bar">
@@ -173,16 +192,16 @@
 
       <div class="highlight-bar">
         <div class="highlight-card">
-          <strong>배관 미치겠어요 제발...후하</strong>
+          <strong>교환학생 추천하시나요? 신방과입니다.</strong>
         </div>
         <div class="highlight-card">
-          <strong>화이트 키친크로스로 완성하는 프렌치 주방 💡</strong>
+          <strong>자취방 구할 때 이건 지켜야 한다 하는게 있나요.</strong>
         </div>
         <div class="highlight-card">
           <strong>아랫집 담배 냄새 때문에 죽겠어요.</strong>
         </div>
         <div class="highlight-card">
-          <strong>사이드테이블 핫템 모음 🔍</strong>
+          <strong>대외활동 뭐가 좋을까요..</strong>
         </div>
       </div>
 
