@@ -17,6 +17,12 @@
       </div>
     </div>
 
+    {% if post.image %}
+      <div style="margin-bottom:1rem;">
+        <img src="{{ post.image.url }}" alt="첨부 이미지" style="max-width:100%; border-radius:8px;">
+      </div>
+    {% endif %}
+
     <div class="post-content">
       {{ post.content|linebreaks }}
     </div>

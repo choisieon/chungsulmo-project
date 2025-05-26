@@ -15,7 +15,7 @@ def post_detail(request, pk):
 
 def post_new(request):
     if request.method == "POST":
-        form = PostForm(request.POST)
+        form = PostForm(request.POST, request.FILES)
         if form.is_valid():
             post = form.save(commit=False)
             # 로그인한 사용자가 있으면 그 유저를, 아니면 임시로 첫 번째 유저를 author로 지정

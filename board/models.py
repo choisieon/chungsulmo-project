@@ -9,6 +9,7 @@ class Post(models.Model):  # 이 부분이 반드시 있어야 함
     pub_date = models.DateTimeField(auto_now_add=True)
     views = models.PositiveIntegerField(default=0)  # 조회수
     likes = models.ManyToManyField(User, related_name='liked_posts')  # 좋아요
+    image = models.ImageField(upload_to='post_images/', blank=True, null=True)  # 이미지 필드 추가
 
     def __str__(self):
         return self.title
