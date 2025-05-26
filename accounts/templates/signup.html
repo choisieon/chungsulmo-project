@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>회원 가입</title>
+  <style>
+    body {
+      background-color: #f0f0f0;
+      font-family: 'Arial', sans-serif;
+      text-align: center;
+      padding: 50px;
+    }
+    .signup-container {
+      background-color: white;
+      padding: 40px;
+      border-radius: 8px;
+      width: 350px;
+      margin: 0 auto;
+    }
+    .title-box {
+      background-color: #e6fafd;
+      padding: 10px;
+      font-size: 20px;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+    .form-button {
+      width: 100%;
+      padding: 10px;
+      margin: 15px 0;
+      border: 1px solid black;
+      font-weight: bold;
+      background-color: white;
+      cursor: pointer;
+    }
+    .sns-label {
+      margin: 20px 0 10px;
+      font-size: 13px;
+      color: #666;
+    }
+    .sns-button {
+      width: 100%;
+      padding: 10px;
+      margin: 5px 0;
+      border: 1px solid black;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .kakao { background-color: #FEE500; }
+    .naver { background-color: #03C75A; color: white; }
+    .google { background-color: white; }
+    #signup-form {
+      display: none;
+    }
+    #sns-section {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <div class="signup-container">
+    <div class="title-box">회원 가입</div>
+
+    <!-- 계정 생성 버튼 -->
+    <button id="create-btn" class="form-button" onclick="showForm()">계정 생성</button>
+
+    <!-- 계정 생성 폼 -->
+    <form id="signup-form" method="POST" action="">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <input type="submit" class="form-button" value="회원가입 완료">
+    </form>
+
+    <!-- SNS 버튼 영역 -->
+    <div id="sns-section">
+      <div class="sns-label">SNS로 가입하기</div>
+      <button class="sns-button kakao">KAKAO 가입하기</button>
+      <button class="sns-button naver">NAVER 가입하기</button>
+      <button class="sns-button google">GOOGLE 가입하기</button>
+    </div>
+  </div>
+
+  <script>
+    function showForm() {
+      document.getElementById("signup-form").style.display = "block";
+      document.getElementById("sns-section").style.display = "none";
+      document.getElementById("create-btn").style.display = "none";
+    }
+  </script>
+</body>
+</html>

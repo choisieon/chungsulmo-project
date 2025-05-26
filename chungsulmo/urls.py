@@ -16,8 +16,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.shortcuts import redirect
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('community.urls')),  # community 앱으로 연결,
+    path('', include('accounts.urls')),
+    path('', lambda request: redirect('community:index')),
 ]

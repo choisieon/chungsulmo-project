@@ -1,5 +1,5 @@
-# Created by https://www.toptal.com/developers/gitignore/api/python,django,windows,macos
-# Edit at https://www.toptal.com/developers/gitignore?templates=python,django,windows,macos
+# Created by https://www.toptal.com/developers/gitignore/api/django,python,windows,macos
+# Edit at https://www.toptal.com/developers/gitignore?templates=django,python,windows,macos
 
 ### Django ###
 *.log
@@ -322,4 +322,4 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
-# End of https://www.toptal.com/developers/gitignore/api/python,django,windows,macos
+# End of https://www.toptal.com/developers/gitignore/api/django,python,windows,macos

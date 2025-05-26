@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>로그인</title>
+  <style>
+    body {
+      background-color: #e5e5e5;
+      font-family: 'Arial', sans-serif;
+      padding: 50px;
+    }
+    .login-container {
+      background-color: white;
+      padding: 40px;
+      border-radius: 8px;
+      width: 400px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .title-box {
+      background-color: #e6fafd;
+      padding: 10px;
+      font-size: 20px;
+      font-weight: bold;
+      margin-bottom: 30px;
+    }
+    .login-form input[type="text"],
+    .login-form input[type="password"] {
+      width: 90%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid black;
+      text-align: center;
+    }
+    .login-form input[type="submit"] {
+      width: 93%;
+      padding: 10px;
+      margin: 15px 0;
+      background-color: #f6f6f6;
+      border: 1px solid black;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    hr {
+      margin: 20px 0;
+    }
+    .sns-label {
+      font-size: 13px;
+      color: #666;
+      margin-bottom: 10px;
+    }
+    .sns-button {
+      width: 93%;
+      padding: 10px;
+      margin: 5px 0;
+      border: 1px solid black;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .kakao { background-color: #FEE500; }
+    .naver { background-color: #03C75A; color: white; }
+    .google { background-color: white; }
+    .signup-link {
+      text-align: right;
+      margin-top: 15px;
+    }
+    .signup-link a {
+      font-size: 12px;
+      color: #333;
+      text-decoration: none;
+      background-color: #e0e0e0;
+      padding: 5px 10px;
+      border-radius: 3px;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-container">
+    <div class="title-box">로그인</div>
+
+    <form action="" method="POST" class="login-form">
+      {% csrf_token %}
+      {{ form.username.label_tag }}<br>
+      {{ form.username }}<br>
+      {{ form.password.label_tag }}<br>
+      {{ form.password }}
+      <input type="submit" value="Login">
+    </form>
+
+    <hr>
+    <div class="sns-label">SNS로 로그인</div>
+    <button class="sns-button kakao">KAKAO 로그인</button>
+    <button class="sns-button naver">NAVER 로그인</button>
+    <button class="sns-button google">GOOGLE 로그인</button>
+
+    <div class="signup-link">
+      <a href="{% url 'accounts:signup' %}">회원가입</a>
+    </div>
+  </div>
+</body>
+</html>

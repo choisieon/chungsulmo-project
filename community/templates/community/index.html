@@ -146,11 +146,20 @@
       </nav>
     </div>
     <div class="top-actions">
-      <a href="#">로그인</a>
-      <a href="#">회원가입</a>
-      <a href="#">문의</a>
-      <a href="#" class="write-button">글쓰기</a>
-    </div>
+  {% if user.is_authenticated %}
+    <span>{{ user.username }} 님 환영합니다!</span>
+    <form action="{% url 'accounts:logout' %}" method="post" style="display: inline;">
+      {% csrf_token %}
+      <button type="submit" style="background: none; border: none; color: #007aff; cursor: pointer;">로그아웃</button>
+    </form>
+  {% else %}
+    <a href="{% url 'accounts:login' %}" class="btn btn-link">로그인</a>
+    <a href="{% url 'accounts:signup' %}">회원가입</a>
+  {% endif %}
+  <a href="#">문의</a>
+  <a href="#" class="write-button">글쓰기</a>
+</div>
+
   </header>
 
   <div class="sub-nav">
