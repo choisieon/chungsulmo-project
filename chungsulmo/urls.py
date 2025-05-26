@@ -20,4 +20,5 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('community.urls')),  # community 앱으로 연결,
+    path('board/', include('board.urls')),
 ]

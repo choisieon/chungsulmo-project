@@ -1,0 +1,13 @@
+<!-- board/templates/board/post_edit.html -->
+{% extends "base.html" %}
+
+{% block content %}
+  <div class="post-edit-form">
+    <h2>새 글 작성</h2>
+    <form method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit" class="submit-button">저장</button>
+    </form>
+  </div>
+{% endblock %}
