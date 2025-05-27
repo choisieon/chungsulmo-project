@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>청설모 커뮤니티</title>
+  <title>{% block title %}청설모 커뮤니티{% endblock %}</title>
   <style>
     body { font-family: 'Apple SD Gothic Neo', sans-serif; margin: 0; background: #f5f9ff; }
     header {
@@ -132,15 +132,104 @@
       justify-content: center;
       color: #aaa;
     }
+    /* 게시글 상세 페이지 스타일 */
+    .post-detail {
+    background: white;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .post-header h1 {
+    margin: 0 0 1rem;
+    color: #333;
+    }
+
+    .post-meta {
+    display: flex;
+    gap: 1rem;
+    color: #666;
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+    }
+
+    .post-content {
+    line-height: 1.6;
+    margin-bottom: 2rem;
+    }
+
+    .like-button {
+    text-decoration: none;
+    font-size: 1.2rem;
+    }
+
+    .comment-section {
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid #eee;
+    }
+
+    .comment-form textarea {
+    width: 100%;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    }
+
+    .comment-list {
+    margin-top: 1rem;
+    }
+
+    .comment {
+    padding: 1rem;
+    background: #f8f9fa;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+    }
+
+    .comment-author {
+    font-weight: bold;
+    color: #007aff;
+    }
+
+    .comment-date {
+    font-size: 0.8rem;
+    color: #666;
+    }
+
+    .main-nav .active, .sub-nav .active {
+      color: #197;
+      font-weight: bold;
+    }
+
+    .sub-sub-nav {
+    display: flex;
+    gap: 1rem;
+    padding: 0.5rem 2rem;
+    background: #f8f9fa;
+    border-bottom: 1px solid #dee2e6;
+    margin-bottom: 1.5rem;
+    }
+    .sub-sub-nav a {
+      text-decoration: none;
+      color: #333;
+      font-size: 14px;
+    }
+    .sub-sub-nav a.active {
+    color: #007aff;
+    font-weight: bold;
+    }
+
   </style>
 </head>
 <body>
-  <header>
+<header>
     <div class="logo-nav-box">
       <div class="logo">청설모</div>
       {% load active_link_tags %}
       <nav class="main-nav">
-        <a href="{% url 'post_list' %}" class="{% active_link 'post_list' %}">커뮤니티</a>
+        <a href="{% url 'post_list' %}" {% if request.path|slice:":7" == "/board/" %}class="active"{% endif %}>커뮤니티</a>
         <a href="#">멘토멘티</a>
         <a href="#">마이페이지</a>
         <a href="#">청년정책</a>
@@ -150,58 +239,34 @@
       <a href="#">로그인</a>
       <a href="#">회원가입</a>
       <a href="#">문의</a>
-      <a href="#" class="write-button">글쓰기</a>
+      <a href="{% url 'post_new' %}" class="write-button">글쓰기</a>
     </div>
   </header>
-
-  <div class="sub-nav">
-    <a href="{% url 'post_list' %}" class="{% active_link 'post_list' %}">홈</a>
-    <a href="{% url 'category_posts' 'review' %}" class="{% active_link 'category_posts' category='review' %}">후기</a>
-    <a href="{% url 'category_posts' 'question' %}" class="{% active_link 'category_posts' category='question' %}">궁금해</a>
-    <a href="{% url 'category_posts' 'share' %}" class="{% active_link 'category_posts' category='share' %}">자료공유</a>
-    <a href="{% url 'category_posts' 'chat' %}" class="{% active_link 'category_posts' category='chat' %}">잡담</a>
+<div class="sub-nav">
+  <a href="{% url 'post_list' %}" class="{% if not current_category %}active{% endif %}">홈</a>
+  <a href="{% url 'category_posts' 'review' %}" class="{% if current_category == 'review' %}active{% endif %}">후기</a>
+  <a href="{% url 'category_posts' 'question' %}" class="{% if current_category == 'question' %}active{% endif %}">궁금해</a>
+  <a href="{% url 'category_posts' 'share' %}" class="{% if current_category == 'share' %}active{% endif %}">자료공유</a>
+  <a href="{% url 'category_posts' 'chat' %}" class="{% if current_category == 'chat' %}active{% endif %}">잡담</a>
+</div>
+<!-- {# 후기 카테고리일 때만 소분류 네비게이션 표시 #} -->
+{% if current_category == 'review' %}
+  <div class="sub-sub-nav">
+    {% for key, label in subcategories %}
+      <a href="{% url 'subcategory_posts' 'review' key %}"
+         class="{% if current_subcategory == key %}active{% endif %}">
+        {{ label }}
+      </a>
+    {% endfor %}
   </div>
-
-  <div class="container">
+{% endif %}
+<div class="container">
     <div class="main-content">
-      <div class="description">
-        청년들을 위한 커뮤니티 플랫폼, 청설모는 삶의 이야기부터 정책 정보까지 모두 함께 나누는 공간입니다.
-      </div>
-
-      <div class="search-bar">
-        <input type="text" placeholder="궁금한 내용을 검색해보세요..." />
-      </div>
-
-      <div class="highlight-bar">
-        <div class="highlight-card">
-          <strong>배관 미치겠어요 제발...후하</strong>
-        </div>
-        <div class="highlight-card">
-          <strong>화이트 키친크로스로 완성하는 프렌치 주방 💡</strong>
-        </div>
-        <div class="highlight-card">
-          <strong>아랫집 담배 냄새 때문에 죽겠어요.</strong>
-        </div>
-        <div class="highlight-card">
-          <strong>사이드테이블 핫템 모음 🔍</strong>
-        </div>
-      </div>
-
-      <div class="post-card">
-        <h4>혼자 사는 방 꾸미기 팁 공유합니다!</h4>
-        <p>자취하면서 알아낸 꿀팁 정리해봤어요. 커튼은 무조건 어두운 색!</p>
-      </div>
-      <div class="post-card">
-        <h4>면접에서 이런 질문 받았는데요...</h4>
-        <p>청년 면접에서 자주 묻는 질문, 다 같이 공유해봐요!</p>
-      </div>
-      <div class="post-card">
-        <h4>노트북 추천해주세요</h4>
-        <p>취준 중인데 영상 편집도 가볍게 될만한 노트북 없을까요?</p>
-      </div>
+      <!-- 이 부분만 페이지마다 다르게 표시 -->
+      {% block content %}
+      {% endblock %}
     </div>
-
-    <div class="sidebar">
+  <div class="sidebar">
       <div class="popular-searches">
         <h4>인기 검색어</h4>
         <ul>
@@ -212,7 +277,6 @@
           <li>#면접준비</li>
         </ul>
       </div>
-
       <div class="policy-image">
         <p>정책 관련 이미지 영역 (예: 포스터)</p>
       </div>
