@@ -20,8 +20,7 @@ from django.shortcuts import redirect
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('board/', include('board.urls')),
-    path('community/', include('community.urls')),  # community 앱으로 연결,
-    path('accounts/', include('accounts.urls')),
+    path('', include('community.urls')),  # community 앱으로 연결,
+    path('', include('accounts.urls')),
     path('', lambda request: redirect('community:index')),
 ]

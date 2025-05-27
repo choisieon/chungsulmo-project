@@ -42,9 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'community',
     'accounts',
-    'board',
-    'active_link'
-]
+    'active_link']
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
