@@ -140,10 +140,11 @@
   <header>
     <div class="logo-nav-box">
       <div class="logo">청설모</div>
+      {% load active_link_tags %}
       <nav class="main-nav">
-        <a href="{% url 'community:conservation' %}">커뮤니티</a>
-        <a href="{% url 'community:mentoring' %}">멘토멘티</a>
-        <a href="{% url 'community:mypage' %}">마이페이지</a>
+        <a href="{% url 'post_list' %}" class="{% active_link 'post_list' %}">커뮤니티</a>
+        <a href="#">멘토멘티</a>
+        <a href="#">마이페이지</a>
         <a href="#">청년정책</a>
       </nav>
     </div>
@@ -187,11 +188,11 @@
 
 {% if request.path == '/conservation/' %}
   <div class="sub-nav">
-    <a href="#">홈</a>
-    <a href="#">후기</a>
-    <a href="#">궁금해</a>
-    <a href="#">자료공유</a>
-    <a href="#">잡담</a>
+    <a href="{% url 'post_list' %}" class="{% active_link 'post_list' %}">홈</a>
+    <a href="{% url 'category_posts' 'review' %}" class="{% active_link 'category_posts' category='review' %}">후기</a>
+    <a href="{% url 'category_posts' 'question' %}" class="{% active_link 'category_posts' category='question' %}">궁금해</a>
+    <a href="{% url 'category_posts' 'share' %}" class="{% active_link 'category_posts' category='share' %}">자료공유</a>
+    <a href="{% url 'category_posts' 'chat' %}" class="{% active_link 'category_posts' category='chat' %}">잡담</a>
   </div>
 {% endif %}
 
@@ -224,7 +225,7 @@
       <div class="post-card">
         <h4>혼자 사는 방 꾸미기 팁 공유합니다!</h4>
         <p>자취하면서 알아낸 꿀팁 정리해봤어요. 커튼은 무조건 어두운 색!</p>
-      </div>
+      </div>s
       <div class="post-card">
         <h4>면접에서 이런 질문 받았는데요...</h4>
         <p>청년 면접에서 자주 묻는 질문, 다 같이 공유해봐요!</p>
