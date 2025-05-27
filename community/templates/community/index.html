@@ -138,8 +138,9 @@
   <header>
     <div class="logo-nav-box">
       <div class="logo">청설모</div>
+      {% load active_link_tags %}
       <nav class="main-nav">
-        <a href="#">커뮤니티</a>
+        <a href="{% url 'post_list' %}" class="{% active_link 'post_list' %}">커뮤니티</a>
         <a href="#">멘토멘티</a>
         <a href="#">마이페이지</a>
         <a href="#">청년정책</a>
@@ -154,11 +155,11 @@
   </header>
 
   <div class="sub-nav">
-    <a href="#">홈</a>
-    <a href="#">후기</a>
-    <a href="#">궁금해</a>
-    <a href="#">자료공유</a>
-    <a href="#">잡담</a>
+    <a href="{% url 'post_list' %}" class="{% active_link 'post_list' %}">홈</a>
+    <a href="{% url 'category_posts' 'review' %}" class="{% active_link 'category_posts' category='review' %}">후기</a>
+    <a href="{% url 'category_posts' 'question' %}" class="{% active_link 'category_posts' category='question' %}">궁금해</a>
+    <a href="{% url 'category_posts' 'share' %}" class="{% active_link 'category_posts' category='share' %}">자료공유</a>
+    <a href="{% url 'category_posts' 'chat' %}" class="{% active_link 'category_posts' category='chat' %}">잡담</a>
   </div>
 
   <div class="container">

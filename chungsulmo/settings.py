@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'community',
     'board',
+    'active_link',
 ]
 
 MIDDLEWARE = [

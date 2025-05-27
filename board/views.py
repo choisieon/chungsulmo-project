@@ -7,7 +7,28 @@ from django.contrib.auth.models import User
 # Create your views here.
 def post_list(request):
     posts = Post.objects.order_by('-pub_date')
-    return render(request, 'board/post_list.html', {'posts': posts})
+    return render(request, 'board/post_list.html', {'posts': posts, 'current_category': None})
+
+def category_posts(request, category):
+    posts = Post.objects.filter(category=category).order_by('-pub_date')
+    category_name = dict(Post.CATEGORY_CHOICES).get(category, '전체')
+    subcategories = Post.SUBCATEGORIES.get(category, [])
+    return render(request, 'board/post_list.html', {
+        'posts': posts,
+        'current_category': category,
+        'category_name': category_name,
+        'subcategories': subcategories,
+    })
+
+def subcategory_posts(request, category, subcategory):
+    posts = Post.objects.filter(category=category, subcategory=subcategory).order_by('-pub_date')
+    subcategories = Post.SUBCATEGORY_CHOICES
+    return render(request, 'board/post_list.html', {
+        'posts': posts,
+        'current_category': category,
+        'current_subcategory': subcategory,
+        'subcategories': subcategories,
+    })
 
 def post_detail(request, pk):
     post = get_object_or_404(Post, pk=pk)
