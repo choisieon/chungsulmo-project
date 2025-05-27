@@ -59,19 +59,34 @@
 </head>
 <body>
   <div class="signup-container">
-    <div class="title-box">회원 가입</div>
+  <div class="title-box">회원 가입</div>
 
-    <!-- 계정 생성 버튼 -->
-    <button id="create-btn" class="form-button" onclick="showForm()">계정 생성</button>
+  <!-- 계정 생성 버튼 -->
+  <button id="create-btn" class="form-button" onclick="showForm()">계정 생성</button>
 
-    <!-- 계정 생성 폼 -->
-    <form id="signup-form" method="POST" action="">
-      {% csrf_token %}
-      {{ form.as_p }}
-      <input type="submit" class="form-button" value="회원가입 완료">
-    </form>
+  <!-- 계정 생성 폼 -->
+  <form id="signup-form" method="POST" action="" style="display: none;">
+    {% csrf_token %}
+    
+    <div>
+      {{ form.username.label_tag }}
+      {{ form.username }}
+    </div>
 
-    <!-- SNS 버튼 영역 -->
+    <div>
+      {{ form.password1.label_tag }}
+      {{ form.password1 }}
+    </div>
+
+    <div>
+      {{ form.password2.label_tag }}
+      {{ form.password2 }}
+    </div>
+
+    <input type="submit" class="form-button" value="회원가입 완료">
+  </form>
+
+    <!-- SNS 버튼 구역 -->
     <div id="sns-section">
       <div class="sns-label">SNS로 가입하기</div>
       <button class="sns-button kakao">KAKAO 가입하기</button>
@@ -84,7 +99,6 @@
     function showForm() {
       document.getElementById("signup-form").style.display = "block";
       document.getElementById("sns-section").style.display = "none";
-      document.getElementById("create-btn").style.display = "none";
     }
   </script>
 </body>
