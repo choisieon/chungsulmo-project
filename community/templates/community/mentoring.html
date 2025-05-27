@@ -163,29 +163,9 @@
         <a href="{% url 'accounts:signup' %}">회원가입</a>
       {% endif %}
       <a href="#">문의</a>
-      
-      <div class="dropdown">
-      {% if user.is_authenticated %}
-    <button class="btn write-button dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-      글쓰기
-    </button>
-    <ul class="dropdown-menu">
-      <h6 class="dropdown-header" style="font-weight: bold;">커뮤니티</h6>
-      <li><a class="dropdown-item" href="#">후기</a></li>
-      <li><a class="dropdown-item" href="#">궁금해</a></li>
-      <li><a class="dropdown-item" href="#">자료공유</a></li>
-      <li><a class="dropdown-item" href="#">잡담소</a></li>
-      <li><hr class="dropdown-divider"></li>
-      <h6 class="dropdown-header" style="font-weight: bold;">멘토멘티</h6>
-      <li><a class="dropdown-item" href="#">글쓰기</a></li>
-    </ul>
-    {% else %}
-    <a href="{% url 'accounts:login' %}" class="btn btn-outline-primary">글쓰기</a>
-  {% endif %}
-  </div>
-    </div>
+      <a href="#" class="write-button">글쓰기</a>
+      </div>
 
-    </div>
   </header>
 
   <div class="sub-nav">
