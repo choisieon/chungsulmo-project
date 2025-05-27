@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>청설모 커뮤니티</title>
@@ -29,6 +30,10 @@
       color: #333;
       text-decoration: none;
       font-weight: 500;
+    }
+    .main-nav a.active {
+      color: #007aff;
+      font-weight: bold;
     }
     .top-actions {
       display: flex;
@@ -136,31 +141,29 @@
   </style>
 </head>
 <body>
-
   <header>
     <div class="logo-nav-box">
       <div class="logo">청설모</div>
       <nav class="main-nav">
-        <a href="{% url 'community:conservation' %}">커뮤니티</a>
+        <a href="{% url 'community:conservation' %}" class="active">커뮤니티</a>
         <a href="{% url 'community:mentoring' %}">멘토멘티</a>
         <a href="{% url 'community:mypage' %}">마이페이지</a>
         <a href="#">청년정책</a>
       </nav>
     </div>
-
     <div class="top-actions">
-  {% if user.is_authenticated %}
-    <span>{{ user.username }} 님 환영합니다!</span>
-    <form action="{% url 'accounts:logout' %}" method="post" style="display: inline;">
-      {% csrf_token %}
-      <button type="submit" style="background: none; border: none; color: #007aff; cursor: pointer;">로그아웃</button>
-    </form>
-  {% else %}
-    <a href="{% url 'accounts:login' %}" class="btn btn-link">로그인</a>
-    <a href="{% url 'accounts:signup' %}">회원가입</a>
-  {% endif %}
-  <a href="#">문의</a>
-
+      {% if user.is_authenticated %}
+        <span>{{ user.username }} 님 환영합니다!</span>
+        <form action="{% url 'accounts:logout' %}" method="post" style="display: inline;">
+          {% csrf_token %}
+          <button type="submit" style="background: none; border: none; color: #007aff; cursor: pointer;">로그아웃</button>
+        </form>
+      {% else %}
+        <a href="{% url 'accounts:login' %}" class="btn btn-link">로그인</a>
+        <a href="{% url 'accounts:signup' %}">회원가입</a>
+      {% endif %}
+      <a href="#">문의</a>
+      
       <div class="dropdown">
       {% if user.is_authenticated %}
     <button class="btn write-button dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -181,11 +184,9 @@
   {% endif %}
   </div>
     </div>
-</div>
-
+    
   </header>
 
-{% if request.path == '/conservation/' %}
   <div class="sub-nav">
     <a href="#">홈</a>
     <a href="#">후기</a>
@@ -193,8 +194,6 @@
     <a href="#">자료공유</a>
     <a href="#">잡담</a>
   </div>
-{% endif %}
-
 
   <div class="container">
     <div class="main-content">
@@ -252,6 +251,6 @@
       </div>
     </div>
   </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
