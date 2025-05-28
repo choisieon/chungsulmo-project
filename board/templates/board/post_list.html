@@ -1,0 +1,45 @@
+{% extends "base.html" %} 
+
+{% block content %}
+  <div class="description">
+    청년들을 위한 커뮤니티 플랫폼, 청설모는 삶의 이야기부터 정책 정보까지 모두 함께 나누는 공간입니다.
+  </div>
+  <!-- {# ▼▼▼ 여기에 소분류 네비게이션 추가 ▼▼▼ #} -->
+  {% if subcategories %}
+    <div class="sub-sub-nav">
+      {% for key, label in subcategories %}
+        <a href="{% url 'subcategory_posts' current_category key %}"
+           class="{% if current_subcategory == key %}active{% endif %}">
+          {{ label }}
+        </a>
+      {% endfor %}
+    </div>
+  {% endif %}
+  <!-- {# ▲▲▲ 소분류 네비게이션 끝 ▲▲▲ #} -->
+  <!-- 검색바, 하이라이트 등 원하는 UI 추가 -->
+ {% for post in posts %}
+  <div class="post-card" style="display: flex; align-items: flex-start; gap: 1.5rem;">
+    <div style="flex: 1;">
+      <h4>
+        <a href="{% url 'post_detail' post.pk %}" style="text-decoration: none; color: inherit;">
+          {% if post.category != 'home' %}
+            [{{ post.get_category_display }}]  {{ post.title }}
+          {% else %}
+            {{ post.title }}
+          {% endif %}
+        </a>
+      </h4>
+      <p>{{ post.content|truncatechars:100 }}</p>
+      <small>{{ post.author }} | {{ post.pub_date|date:"Y-m-d H:i" }}</small>
+    </div>
+    {% if post.image %}
+      <div style="flex-shrink: 0;">
+        <img src="{{ post.image.url }}" alt="첨부 이미지" style="max-width:120px; max-height:90px; border-radius:8px; object-fit:cover;">
+      </div>
+    {% endif %}
+    {% if category_name %}
+      <div class="description">{{ category_name }} 게시판</div>
+    {% endif %}
+  </div>
+{% endfor %}
+{% endblock %}
