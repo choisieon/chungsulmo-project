@@ -9,3 +9,4 @@ urlpatterns = [
     path('category/<str:category>/', views.category_posts, name='category_posts'),
     path('category/<str:category>/<str:subcategory>/', views.subcategory_posts, name='subcategory_posts'),
 ]
+

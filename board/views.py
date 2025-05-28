@@ -4,6 +4,7 @@ from .forms import PostForm, CommentForm
 from django.views.decorators.http import require_POST
 from django.contrib.auth.models import User
 
+
 # Create your views here.
 def post_list(request):
     posts = Post.objects.order_by('-pub_date')
