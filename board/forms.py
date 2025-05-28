@@ -8,6 +8,8 @@ class PostForm(forms.ModelForm):
         fields = ['title', 'content', 'image', 'category', 'subcategory']
 
 class CommentForm(forms.ModelForm):
+    parent_id = forms.IntegerField(widget=forms.HiddenInput, required=False)
+
     class Meta:
         model = Comment
         fields = ['content']

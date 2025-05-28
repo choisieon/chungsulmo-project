@@ -1,0 +1,15 @@
+{% for reply in replies %}
+  <div class="comment reply" style="margin-left: 2rem;" id="comment-{{ reply.id }}">
+    <div class="comment-author">{{ reply.author }}</div>
+    <div class="comment-content">{{ reply.content }}</div>
+    <div class="comment-date">{{ reply.created_at|date:"Y-m-d H:i" }}</div>
+    <a href="#" class="reply-toggle" data-comment-id="{{ reply.id }}">답글</a>
+    <form method="post" class="comment-form reply-form" data-parent-id="{{ reply.id }}" style="display:none; margin-top:8px;">
+      {% csrf_token %}
+      {{ comment_form.content }}
+      <input type="hidden" name="parent_id" value="{{ reply.id }}">
+      <button type="submit">대댓글 작성</button>
+    </form>
+    {% include "board/comment_replies.html" with replies=reply.replies.all comment_form=comment_form %}
+  </div>
+{% endfor %}

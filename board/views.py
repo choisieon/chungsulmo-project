@@ -32,7 +32,39 @@ def subcategory_posts(request, category, subcategory):
 
 def post_detail(request, pk):
     post = get_object_or_404(Post, pk=pk)
-    return render(request, 'board/post_detail.html', {'post': post})
+    
+    # 조회수 증가(본인 제외)
+    if request.user != post.author:
+        post.views += 1
+        post.save()
+
+    comments = post.comments.filter(parent__isnull=True)
+    comment_form = CommentForm(request.POST or None)
+    
+    if request.method == 'POST' and comment_form.is_valid():
+        parent_id = comment_form.cleaned_data.get('parent_id')
+        parent = None
+        
+        if parent_id:
+            try:
+                parent = Comment.objects.get(id=parent_id, post=post)
+            except Comment.DoesNotExist:
+                parent = None
+
+        Comment.objects.create(
+            post=post,
+            author=request.user,
+            content=comment_form.cleaned_data['content'],
+            parent=parent
+        )
+        return redirect('post_detail', pk=pk)
+
+    return render(request, 'board/post_detail.html', {
+        'post': post,
+        'comments': comments,
+        'comment_form': comment_form,
+    })
+
 
 def post_new(request):
     if request.method == "POST":
@@ -50,30 +82,7 @@ def post_new(request):
         form = PostForm()
     return render(request, 'board/post_edit.html', {'form': form})
 
-def post_detail(request, pk):
-    post = get_object_or_404(Post, pk=pk)
 
-    # 조회수 증가(본인 제외)
-    if request.user != post.author:
-        post.views += 1
-        post.save()
-
-    # 댓글 처리
-    if request.method == 'POST':
-        comment_form = CommentForm(request.POST)
-        if comment_form.is_valid():
-            comment = comment_form.save(commit=False)
-            comment.post = post
-            comment.author = request.user
-            comment.save()
-            return redirect('post_detail', pk=post.pk)
-    else:
-        comment_form = CommentForm()
-    
-    return render(request, 'board/post_detail.html', {
-        'post': post,
-        'comment_form': comment_form,
-    })
 
 @require_POST
 def post_like(request, pk):
@@ -83,3 +92,24 @@ def post_like(request, pk):
     else:
         post.likes.add(request.user)
     return redirect('post_detail', pk=post.pk)
+
+def post_delete(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+    if request.user != post.author:
+        # 권한 없음 처리 (예: 403 에러)
+        return redirect('post_list')
+    if request.method == 'POST':
+        post.delete()
+        return redirect('post_list')
+    # GET 요청 시 삭제 확인 페이지로 이동 (선택)
+    return render(request, 'board/post_confirm_delete.html', {'post': post})
+
+def post_like(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+    user = request.user
+    if user.is_authenticated:
+        if user in post.likes.all():
+            post.likes.remove(user)   # 이미 좋아요 눌렀으면 취소
+        else:
+            post.likes.add(user)    # 안 눌렀으면 추가
+    return redirect('post_detail', pk=pk)
