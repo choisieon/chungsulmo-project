@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>회원 가입</title>
+  <style>
+    body {
+      background-color: #f0f2f5;
+      font-family: 'Apple SD Gothic Neo', sans-serif;
+      margin: 0;
+      padding: 60px 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .signup-container {
+      background-color: white;
+      padding: 40px;
+      border-radius: 16px;
+      width: 360px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    }
+    .title-box {
+      background-color: #e6fafd;
+      padding: 12px;
+      font-size: 22px;
+      font-weight: bold;
+      border-radius: 8px;
+      margin-bottom: 30px;
+      text-align: center;
+    }
+    .form-button {
+      width: 100%;
+      padding: 12px;
+      margin: 20px 0 10px;
+      border: none;
+      font-weight: bold;
+      background-color: #007aff;
+      color: white;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .form-button:hover {
+      background-color: #005dc1;
+    }
+    .form-group {
+      text-align: left;
+      margin-bottom: 16px;
+    }
+    .form-group label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: 500;
+      font-size: 14px;
+    }
+    .form-group input {
+      width: 100%;
+      padding: 10px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+    }
+    .sns-label {
+      margin: 30px 0 10px;
+      font-size: 13px;
+      color: #666;
+    }
+    .sns-button {
+      width: 100%;
+      padding: 10px;
+      margin: 6px 0;
+      border: none;
+      font-weight: bold;
+      cursor: pointer;
+      border-radius: 6px;
+      font-size: 14px;
+    }
+    .kakao { background-color: #FEE500; }
+    .naver { background-color: #03C75A; color: white; }
+    .google {
+      background-color: white;
+      border: 1px solid #ccc;
+    }
+    #signup-form {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="signup-container">
+    <div class="title-box">회원 가입</div>
+
+    <!-- 계정 생성 버튼 -->
+    <button id="create-btn" class="form-button" onclick="showForm()">계정 생성</button>
+
+    <!-- 계정 생성 폼 -->
+    <form id="signup-form" method="POST" action="">
+      {% csrf_token %}
+
+      <div class="form-group">
+        {{ form.username.label_tag }}
+        {{ form.username }}
+      </div>
+
+      <div class="form-group">
+        {{ form.password1.label_tag }}
+        {{ form.password1 }}
+      </div>
+
+      <div class="form-group">
+        {{ form.password2.label_tag }}
+        {{ form.password2 }}
+      </div>
+
+      <input type="submit" class="form-button" value="회원가입 완료">
+    </form>
+
+    <!-- SNS 가입 영역 -->
+    <div id="sns-section">
+      <div class="sns-label">SNS로 가입하기</div>
+      <button class="sns-button kakao">KAKAO 가입하기</button>
+      <button class="sns-button naver">NAVER 가입하기</button>
+      <button class="sns-button google">GOOGLE 가입하기</button>
+    </div>
+  </div>
+
+  <script>
+    function showForm() {
+      document.getElementById("signup-form").style.display = "block";
+      document.getElementById("sns-section").style.display = "none";
+      document.getElementById("create-btn").style.display = "none";
+    }
+  </script>
+</body>
+</html>
