@@ -3,6 +3,7 @@ from .models import Post, Comment
 from .forms import PostForm, CommentForm
 from django.views.decorators.http import require_POST
 from django.contrib.auth.models import User
+from django.urls import reverse
 
 # Create your views here.
 def post_list(request):
@@ -51,13 +52,14 @@ def post_detail(request, pk):
             except Comment.DoesNotExist:
                 parent = None
 
-        Comment.objects.create(
+        new_comment = Comment.objects.create(
             post=post,
             author=request.user,
             content=comment_form.cleaned_data['content'],
             parent=parent
         )
-        return redirect('post_detail', pk=pk)
+        next_url = request.POST.get('next', f'/board/post/{pk}/')
+        return redirect(f'/board/post/{pk}/#comment-{new_comment.id}')
 
     return render(request, 'board/post_detail.html', {
         'post': post,
